@@ -1,0 +1,128 @@
+# ++++++++++++++++++++++++++++++++++++++++++++++++ case1.01: 手动配置全部的26个参数【区间扩大版本】 +++++++++++++++++++++++++++++++++++++++
+import pandas as pd
+from collections import OrderedDict
+parameter_distribution = OrderedDict()
+
+
+all_cols = ['sim_id', 'ZBL_B0', 'ZBL_B1', 'ZBL_B2', 'ZBL_B3', 'Guage_S', 'Guage_C',
+            'den_A1', 'den_A2', 'den_A3', 'den_A4', 'den_A5', 'den_A6', 'den_A7', 'den_A8', 'den_A9', 'den_A10',
+            'P_a1', 'P_a2', 'P_a3', 'P_a4', 'P_a5', 'P_a6', 'P_a7', 'P_a8', 'P_a9', 'P_a10',
+            'a', 'Ec', 'C11', 'C12', 'C44', 'C33', 'C13', 'deta_E_HB', 'deta_E_HF', 'deta_E_vf',
+            'a.err', 'Ec.err', 'C11.err', 'C12.err', 'C44.err', 'C33.err', 'C13.err', 'deta_E_HB.err', 'deta_E_HF.err', 'deta_E_vf.err']
+
+print('all_cols = {}'.format(all_cols))
+param_name = [
+ 'ZBL_B0',
+ 'ZBL_B1',
+ 'ZBL_B2',
+ 'ZBL_B3',
+ 'Guage_S',
+ 'Guage_C', 'den_A1','den_A2', 'den_A3', 'den_A4', 'den_A5', 'den_A6', 'den_A7', 'den_A8', 'den_A9', 'den_A10',
+ 'P_a1','P_a2','P_a3','P_a4','P_a5','P_a6','P_a7','P_a8','P_a9','P_a10']
+
+param = ['sim_id']
+param.extend(param_name)
+# df = pd.read_csv("results_000.out", skiprows=2, names=all_cols)[param]
+# df = pd.read_csv("Mg_20210415_param0.05_sample10_50_10qois_APE_data/culled_000.out", skiprows=2, names=all_cols)[param]
+df = pd.read_csv("data_for_test/results_003.out", skiprows=2, names=all_cols)[param]
+
+sim_id = 66.0
+param_dict = \
+    {
+    'ZBL_B0':  df.ZBL_B0[df.sim_id == sim_id].values[0],
+    'ZBL_B1':  df.ZBL_B1[df.sim_id == sim_id].values[0],
+    'ZBL_B2':  df.ZBL_B2[df.sim_id == sim_id].values[0],
+    'ZBL_B3':  df.ZBL_B3[df.sim_id == sim_id].values[0],
+    'Guage_S': df.Guage_S[df.sim_id == sim_id].values[0],
+    'Guage_C': df.Guage_C[df.sim_id == sim_id].values[0],
+     #-----------------------------------------------------电子密度函数的参数
+    'den_A1':  df.den_A1[df.sim_id == sim_id].values[0],
+    'den_A2':  df.den_A2[df.sim_id == sim_id].values[0],
+    'den_A3':  df.den_A3[df.sim_id == sim_id].values[0],
+    'den_A4':  df.den_A4[df.sim_id == sim_id].values[0],
+    'den_A5':  df.den_A5[df.sim_id == sim_id].values[0],
+    'den_A6':  df.den_A6[df.sim_id == sim_id].values[0],
+    'den_A7':  df.den_A7[df.sim_id == sim_id].values[0],
+    'den_A8':  df.den_A8[df.sim_id == sim_id].values[0],
+    'den_A9':  df.den_A9[df.sim_id == sim_id].values[0],
+    'den_A10': df.den_A10[df.sim_id == sim_id].values[0],
+    #-----------------------------------------------------对势函数的参数
+    'P_a1':  df.P_a1[df.sim_id == sim_id].values[0],
+    'P_a2':  df.P_a2[df.sim_id == sim_id].values[0],
+    'P_a3':  df.P_a3[df.sim_id == sim_id].values[0],
+    'P_a4':  df.P_a4[df.sim_id == sim_id].values[0],
+    'P_a5':  df.P_a5[df.sim_id == sim_id].values[0],
+    'P_a6':  df.P_a6[df.sim_id == sim_id].values[0],
+    'P_a7':  df.P_a7[df.sim_id == sim_id].values[0],
+    'P_a8':  df.P_a8[df.sim_id == sim_id].values[0],
+    'P_a9':  df.P_a9[df.sim_id == sim_id].values[0],
+    'P_a10': df.P_a10[df.sim_id == sim_id].values[0]}
+
+print(param_dict)
+
+
+# 势函数参数区间deta扩大0.05
+# deta = 0.05
+
+deta = 0
+for key, value in param_dict.items():
+    parameter_distribution[key] = {
+        'type': 'uniform',
+        'info': {
+            'a': value-deta,
+            'b': value+deta
+        }
+    }
+
+# print('parameter_distribution初始化信息 = \n', parameter_distribution)
+print('-------------------------')
+
+# 验证对比
+# deta = 0.2
+for key, value in param_dict.items():
+    print(key, '|', value-deta, '|', value+deta)
+
+
+
+
+print('parameter_distribution.keys() = \n', parameter_distribution.keys())
+# print()
+
+
+
+
+#-------------------固定参数（不需要调的）----------------------
+qele1 = 12.0  # for Mg
+qele2 = 12.0  # for Mg
+
+
+# Rk的输入值
+Rk_INPUT = [6.3, 5.9, 5.5, 5.1, 4.7, 4.3, 3.9, 3.5, 3.1, 2.7]
+# rk的输入值
+rk_INPUT = [6.3, 5.9, 5.5, 5.1, 4.7, 4.3, 3.9, 3.5, 3.1, 2.7]
+
+
+
+drho=2.0000e-0003     # 即drho
+dr=6.3000e-0004
+#-------------------固定参数（不需要调的）----------------------
+
+
+if __name__ == '__main__':
+    import numpy as np
+    param_info = parameter_distribution
+    param_names = list(param_info.keys())
+    # print(param_names)
+
+    param_dict = {}
+    for pn in param_names:  # self._param_names = ['chrg_Mg', 'chrg_O', 'MgMg_A', 'MgMg_rho', 'MgMg_C', 'MgO_A', 'MgO_rho', 'MgO_C', 'OO_A', 'OO_rho', 'OO_C']
+        param_dict[pn] = None  # 赋值得到 param_dict = {'chrg_Mg': None, 'chrg_O': None, 'MgMg_A': None, 'MgMg_rho': None, 'MgMg_C': None, 'MgO_A': None, 'MgO_rho': None, 'MgO_C': None, 'OO_A': None, 'OO_rho': None, 'OO_C': None}
+
+    for pn in param_names:
+        if param_info[pn]['type'] == 'uniform':  # 对6个自由参数进行均匀采样，例如，当pn = 'chrg_Mg'时， self._param_info['chrg_Mg'] = {'type': 'uniform', 'info': [1.5, 2.5]}
+            a = param_info[pn]['info']['a']  # 当pn = 'chrg_Mg'时, a = 1.5   #  每次迭代时，均匀分布的下界a和b都是固定的，跟配置文件的模糊均匀分布一样？
+            b = param_info[pn]['info']['b']  # 当pn = 'chrg_Mg'时, b = 2.5
+            param_dict[pn] = np.random.uniform(a, b)  # 例如：np.random.uniform(a,b) = 2.4462101297886916，则param_dict = {'chrg_Mg': 2.4462101297886916}
+
+    print('初始均匀采样param_dict = ', param_dict)
+    print('len(param_dict.keys()) = ', len(param_dict.keys()))

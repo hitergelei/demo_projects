@@ -1,0 +1,22 @@
+ALGO = normal
+EDIFF = 1E-5
+#EDIFFG = -0.02
+
+KSPACING = 0.20000
+LASPH = .TRUE.
+
+ENCUT = 520
+
+#ISYM=0
+ISIF = 2
+ISMEAR = 1
+LREAL = Auto
+LWAVE = False
+LCHARG = .FALSE. 
+NELM = 400
+NSW = 0
+PREC = Accurate
+SIGMA = 0.1
+
+NPAR=6
+

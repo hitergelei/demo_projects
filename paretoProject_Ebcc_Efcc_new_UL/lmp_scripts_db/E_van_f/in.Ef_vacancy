@@ -1,0 +1,119 @@
+# Input file for Vacancy Formation Energy
+#-----------------------------------------------------------------------------------------------------------------
+#       参考视频：https://www.youtube.com/watch?v=cbIrOWfHhKs
+#       参考代码：https://github.com/NextZenStudent/Vacancy-Formation-energy/blob/main/vacancy.lmp
+#------------------------------------------------------------------------------------------------------------------
+
+# --------------- INITIALIZATION ------------------
+clear
+units 		metal
+dimension	3
+boundary	p	p    p      
+atom_style	atomic
+
+# ------------------ ATOM DEFINITION -------------------
+variable ao equal 3.209
+
+#------way2: 自定义hcp结构设置-ok的（得到空位形成能为0.540736716328411, Q: 计算r2半径公式是否可行？A：应该设置为r2=ao/2）
+lattice                    custom ${ao} a1 1.73220508080  0  0 a2  0  1.0  0  a3  0  0 1.624  basis  0.0  0.0  0.0  basis  0.5  0.5  0.0  basis  0.33333333333333333333  0.0  0.5  basis 0.83333333333333333333  0.5  0.5
+region		simbox block -4 4 -4 4 -4 4
+
+create_box	1 simbox
+
+create_atoms	1 region simbox
+ 
+# ------------------------ FORCE FIELDS -----------------------
+pair_style	eam/fs
+pair_coeff             * * ../../lmp_eam_fs_gen/Mg_2021chj.eam.fs Mg
+
+#---------------------------Settings----------------------------
+compute csym all centro/atom fcc
+compute eng all pe/atom 
+compute eatoms all reduce sum c_eng
+
+
+#----------------------Run Minimization-------------------------
+reset_timestep	0
+
+
+thermo 10
+thermo_style custom step pe lx ly lz press pxx pyy pzz c_eatoms 
+
+
+dump 1 all custom 400 dump.relax.1.* id type xs ys zs c_csym c_eng 
+
+
+min_style cg
+minimize 1e-15 1e-15 5000 5000
+
+
+run 0
+undump 1
+
+
+#variable N equal count(all), counts the total number of atoms in the cell
+#the total number of atoms is stored to the variable N
+
+
+variable N equal count(all)
+variable No equal $N
+
+
+#variable Ei equal "c_eatoms" computes the initial energy of the cell system before the vacancy
+#E is needed to store the initial energy of the system to the variable Ei
+
+
+variable E equal "c_eatoms"
+variable Ei equal $E
+
+
+#---------------------------------------------------------------
+#variable r2 equal sqrt(${ao}^2+${ao}^2)/4
+#r2 is the radius of the nickel atom
+#-----
+variable r2 equal ${ao}/2
+#r2 is the radius of the Zn atom  自定义的Zn的hcp结构设置的半径
+
+
+#region select is a region defined so that all atoms within this region are removed
+region select sphere 0 0 0 ${r2} units box
+delete_atoms region select compress yes
+
+
+#---------------------------------------------------------------------
+
+
+reset_timestep	0
+
+
+thermo 10
+thermo_style custom step pe lx ly lz press pxx pyy pzz c_eatoms 
+
+
+dump 1 all custom 2 dump.atom id type xs ys zs c_csym c_eng 
+
+
+
+
+min_style cg
+minimize 1e-15 1e-15 5000 5000
+
+
+#variable Ef equal "c_eatoms" computes the final energy of the cell system after the vacancy
+#The final energy is stored to the variable Ef 
+
+
+variable Ef equal "c_eatoms"
+variable Ev equal (${Ef}-((${No}-1)/${No})*${Ei})
+
+
+#---------------------------------------------
+
+
+######################################
+# SIMULATION DONE
+print "All done"
+print "Total number of atoms = ${No}"
+print "Initial energy of atoms = ${Ei}"
+print "Final energy of atoms = ${Ef}"
+print "Vacancy formation energy = ${Ev}"

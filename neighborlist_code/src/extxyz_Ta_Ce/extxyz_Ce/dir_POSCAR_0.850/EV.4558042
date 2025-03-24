@@ -1,0 +1,61 @@
+m3co1405.para.bscc
+Sun Aug 20 13:25:44 CST 2023
+ running on   96 total cores
+ distrk:  each k-point on   96 cores,    1 groups
+ distr:  one band on   16 cores,    6 groups
+ vasp.6.3.0 20Jan22 (build Mar 25 2022 12:20:17) complex                        
+  
+ POSCAR found type information on POSCAR Ce
+ POSCAR found :  1 types and       4 ions
+ scaLAPACK will be used
+ -----------------------------------------------------------------------------
+|                                                                             |
+|               ----> ADVICE to this user running VASP <----                  |
+|                                                                             |
+|     You have a (more or less) 'small supercell' and for smaller cells       |
+|     it is recommended to use the reciprocal-space projection scheme!        |
+|     The real-space optimization is not efficient for small cells and it     |
+|     is also less accurate ...                                               |
+|     Therefore, set LREAL=.FALSE. in the INCAR file.                         |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ LDA part: xc-table for Pade appr. of Perdew
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The requested file  could not be found or opened for reading            |
+|     k-point information. Automatic k-point generation is used as a          |
+|     fallback, which may lead to unwanted results.                           |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.518880575931E+03    0.51888E+03   -0.18397E+04  2100   0.220E+03
+DAV:   2     0.432173993655E+02   -0.47566E+03   -0.46677E+03  3492   0.418E+02
+DAV:   3    -0.171008115701E+02   -0.60318E+02   -0.59402E+02  3180   0.200E+02
+DAV:   4    -0.214037890608E+02   -0.43030E+01   -0.41308E+01  4050   0.405E+01
+DAV:   5    -0.217823012615E+02   -0.37851E+00   -0.36236E+00  3702   0.124E+01    0.968E+01
+DAV:   6    -0.189047254548E+02    0.28776E+01   -0.20654E+01  2826   0.337E+01    0.300E+01
+DAV:   7    -0.187578702766E+02    0.14686E+00   -0.35561E+00  3690   0.143E+01    0.240E+01
+DAV:   8    -0.187299870166E+02    0.27883E-01   -0.99870E-01  3858   0.695E+00    0.338E+00
+DAV:   9    -0.187366482470E+02   -0.66612E-02   -0.21506E-01  3960   0.309E+00    0.510E-01
+DAV:  10    -0.187375865964E+02   -0.93835E-03   -0.24085E-02  3864   0.116E+00    0.455E-01
+DAV:  11    -0.187381663157E+02   -0.57972E-03   -0.62201E-03  4128   0.417E-01    0.134E-01
+DAV:  12    -0.187382472969E+02   -0.80981E-04   -0.12984E-03  3666   0.230E-01    0.902E-02
+DAV:  13    -0.187382357113E+02    0.11586E-04   -0.31406E-04  3588   0.114E-01    0.191E-02
+DAV:  14    -0.187382430338E+02   -0.73225E-05   -0.93162E-05  2676   0.621E-02
+   1 F= -.18738243E+02 E0= -.18737817E+02  d E =-.127699E-02
+Sun Aug 20 13:25:59 CST 2023

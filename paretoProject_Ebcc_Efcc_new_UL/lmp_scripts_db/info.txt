@@ -1,0 +1,2 @@
+lmp_scripts_db目录，是一个配置文件。用于指定要计算的目标量以及需要的lammps计算.in文件和.mod文件等
+structure_db目录，是拷贝lmp_scripts_db目录生成的，在此基础上进行后面的lammps计算qois的任务

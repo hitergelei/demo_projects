@@ -1,0 +1,77 @@
+LAMMPS (29 Aug 2024)
+clear
+units metal
+boundary p p p
+atom_style atomic
+read_data tmp/data.lammps
+Reading data file ...
+  triclinic box = (0 0 0) to (9.450121 9.450121 9.450121) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  54 atoms
+  read_data CPU = 0.000 seconds
+
+### interactions
+mass              1 42
+pair_style  adp
+pair_coeff * * ./Mo.adp Mo
+neighbor 1.0 bin
+neigh_modify  every 1  delay 1  check yes
+thermo_style custom pe pxx pyy pzz pyz pxz pxy
+thermo_modify flush yes
+thermo 1
+run 1
+WARNING: No fixes with time integration, atoms won't move (../verlet.cpp:60)
+Neighbor list info ...
+  update: every = 1 steps, delay = 1 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.5
+  ghost atom cutoff = 7.5
+  binsize = 3.75, bins = 3 3 3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair adp, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton/tri
+      stencil: half/bin/3d/tri
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 5.739 | 5.739 | 5.739 Mbytes
+    PotEng          Pxx            Pyy            Pzz            Pyz            Pxz            Pxy      
+-580.92169      70721.7        74997.842      70304.007      2875.3308     -10483.413     -3469.9696    
+-580.92169      70721.7        74997.842      70304.007      2875.3308     -10483.413     -3469.9696    
+Loop time of 0.000198339 on 1 procs for 1 steps with 54 atoms
+
+Performance: 435.618 ns/day, 0.055 hours/ns, 5041.873 timesteps/s, 272.261 katom-step/s
+5638.3% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.00018568 | 0.00018568 | 0.00018568 |   0.0 | 93.62
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 2.517e-06  | 2.517e-06  | 2.517e-06  |   0.0 |  1.27
+Output  | 7.164e-06  | 7.164e-06  | 7.164e-06  |   0.0 |  3.61
+Modify  | 3.85e-07   | 3.85e-07   | 3.85e-07   |   0.0 |  0.19
+Other   |            | 2.594e-06  |            |       |  1.31
+
+Nlocal:             54 ave          54 max          54 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            801 ave         801 max         801 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:           3025 ave        3025 max        3025 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3025
+Ave neighs/atom = 56.018519
+Neighbor list builds = 0
+Dangerous builds = 0
+variable pxx equal pxx
+variable pyy equal pyy
+variable pzz equal pzz
+variable pxy equal pxy
+variable pxz equal pxz
+variable pyz equal pyz
+variable fx atom fx
+variable fy atom fy
+variable fz atom fz
+variable pe equal pe
+Total wall time: 0:00:00

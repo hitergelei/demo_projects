@@ -1,0 +1,38 @@
+# bulk V lattice
+units             metal
+boundary          p p p
+atom_style        atomic
+variable          i loop 30
+variable          x equal 4.8-0.02*$i
+
+lattice           fcc $x
+region            box block 0 20 0 20 0 20
+create_box        1 box
+create_atoms      1 box
+pair_style        eam/fs
+pair_coeff             * * ./Mg_2021chj.eam.fs Mg
+
+run     0
+variable          E equal  pe
+variable          N equal atoms
+variable          Ec equal $E/$N
+#variable          r equal 1024/($x*8)^3
+variable          v equal vol/$N
+variable          P equal press
+#timestep          0.005
+#thermo            10
+
+min_style         sd
+minimize          1.0e-20 1.0e-30 1000 1000
+
+#compute           3  all pe/atom
+#compute           4 all ke/atom
+#compute           5 all coord/atom 3.0
+#dump             1 all custom 1 dump.atom id xs ys zs c_3 c_4 c_5
+print             "@@@@ (energy per atom): $x ${Ec} $v $P" 
+#dump              1 all cfg  1 dump.atom.*cfg  id  type xs ys zs c_3 c_4 c_5
+#timestep          0.005
+#run               1
+clear
+next              i
+jump              in.Zn_fcc

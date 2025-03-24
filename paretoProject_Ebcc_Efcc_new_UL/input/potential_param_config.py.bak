@@ -1,0 +1,108 @@
+
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++ case1.01: 手动配置全部的26个参数【区间扩大版本】 +++++++++++++++++++++++++++++++++++++++
+
+
+
+from collections import OrderedDict
+parameter_distribution = OrderedDict()
+
+# 简论文中给的势函数参数值
+param_dict = \
+    {
+    'ZBL_B0': 7.13869020382836,
+    'ZBL_B1': -3.42213335283108,
+    'ZBL_B2': -0.0631964668839501,
+    'ZBL_B3': 0.0652873462213261,
+    'Guage_S': 0.645841533432715,
+    'Guage_C': 0.401821332632028,
+     #-----------------------------------------------------电子密度函数的参数
+    'den_A1': 0.00107141640725646,
+    'den_A2': -0.00210005300301463,
+    'den_A3': 0.0578954145943402,
+    'den_A4': -0.113764843494093,
+    'den_A5': 0.0568853339673111,
+    'den_A6': 0.00145565626552289,
+    'den_A7': -0.00306278411316600,
+    'den_A8': 0.169636267604889,
+    'den_A9': -0.335855111019231,
+    'den_A10': 0.167896433936514,
+    #-----------------------------------------------------对势函数的参数
+    'P_a1': -0.000379992731900483,
+    'P_a2': -0.00970160325290971,
+    'P_a3': 0.0223615549371360,
+    'P_a4': 0.0102799999816850,
+    'P_a5': -0.0652603934277463,
+    'P_a6': -0.0541894195773795,
+    'P_a7': 0.304891344131519,
+    'P_a8': 0.277105917461963,
+    'P_a9': 0.386349382979606,
+    'P_a10': -0.122340639111536}
+
+
+
+# 势函数参数区间deta扩大0.05
+deta = 0.05
+
+# deta = 0
+for key, value in param_dict.items():
+    parameter_distribution[key] = {
+        'type': 'uniform',
+        'info': {
+            'a': value-deta,
+            'b': value+deta
+        }
+    }
+
+# print('parameter_distribution初始化信息 = \n', parameter_distribution)
+print('-------------------------')
+
+# 验证对比
+# deta = 0.2
+for key, value in param_dict.items():
+    print(key, '|', value-deta, '|', value+deta)
+
+
+
+
+print('parameter_distribution.keys() = \n', parameter_distribution.keys())
+# print()
+
+
+
+
+#-------------------固定参数（不需要调的）----------------------
+qele1 = 12.0  # for Mg
+qele2 = 12.0  # for Mg
+
+
+# Rk的输入值
+Rk_INPUT = [6.3, 5.9, 5.5, 5.1, 4.7, 4.3, 3.9, 3.5, 3.1, 2.7]
+# rk的输入值
+rk_INPUT = [6.3, 5.9, 5.5, 5.1, 4.7, 4.3, 3.9, 3.5, 3.1, 2.7]
+
+
+
+drho=2.0000e-0003     # 即drho
+dr=6.3000e-0004
+#-------------------固定参数（不需要调的）----------------------
+
+
+if __name__ == '__main__':
+    import numpy as np
+    param_info = parameter_distribution
+    param_names = list(param_info.keys())
+    # print(param_names)
+
+    param_dict = {}
+    for pn in param_names:  # self._param_names = ['chrg_Mg', 'chrg_O', 'MgMg_A', 'MgMg_rho', 'MgMg_C', 'MgO_A', 'MgO_rho', 'MgO_C', 'OO_A', 'OO_rho', 'OO_C']
+        param_dict[pn] = None  # 赋值得到 param_dict = {'chrg_Mg': None, 'chrg_O': None, 'MgMg_A': None, 'MgMg_rho': None, 'MgMg_C': None, 'MgO_A': None, 'MgO_rho': None, 'MgO_C': None, 'OO_A': None, 'OO_rho': None, 'OO_C': None}
+
+    for pn in param_names:
+        if param_info[pn]['type'] == 'uniform':  # 对6个自由参数进行均匀采样，例如，当pn = 'chrg_Mg'时， self._param_info['chrg_Mg'] = {'type': 'uniform', 'info': [1.5, 2.5]}
+            a = param_info[pn]['info']['a']  # 当pn = 'chrg_Mg'时, a = 1.5   #  每次迭代时，均匀分布的下界a和b都是固定的，跟配置文件的模糊均匀分布一样？
+            b = param_info[pn]['info']['b']  # 当pn = 'chrg_Mg'时, b = 2.5
+            param_dict[pn] = np.random.uniform(a, b)  # 例如：np.random.uniform(a,b) = 2.4462101297886916，则param_dict = {'chrg_Mg': 2.4462101297886916}
+
+    print('初始均匀采样param_dict = ', param_dict)
+    print('len(param_dict.keys()) = ', len(param_dict.keys()))

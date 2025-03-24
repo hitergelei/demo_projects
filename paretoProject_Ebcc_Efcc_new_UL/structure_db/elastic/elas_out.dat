@@ -1,0 +1,830 @@
+LAMMPS (3 Mar 2020)
+Lattice spacing in x,y,z = 5.55865 3.209 5.21142
+Created triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+Created 108 atoms
+  create_atoms CPU = 0.000329018 secs
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+WARNING: Energy due to 3 extra global DOFs will be included in minimizer energies
+Per MPI rank memory allocation (min/avg/max) = 4.447 | 4.447 | 4.447 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56583   -55059.338   -60282.332   -60248.621   -44647.061 2.5378099e-11 1.4065477e-11 1.4258155e-11    16.675938        9.627    15.634248    2509.9106 
+Loop time of 4.05312e-06 on 1 procs for 0 steps with 108 atoms
+
+98.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565832096                  0     -298.565832096
+  Force two-norm initial, final = 150.726 150.726
+  Force max component initial, final = 94.4361 94.4361
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 4.053e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Displacing atoms ...
+System init for write_restart ...
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000272036 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56593   -55059.131    -60281.84   -60248.551   -44647.003  0.018408422 1.2920854e-05 1.0033483e-07    16.675922        9.627    15.634248    2509.9081 
+Loop time of 3.09944e-06 on 1 procs for 0 steps with 108 atoms
+
+96.8% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565926515      8.33796915643     -298.565926515
+  Force two-norm initial, final = 0.000690514 0.000690514
+  Force max component initial, final = 0.000105998 0.000105998
+  Final line search alpha, max atom move = 15.6342 0.0016572
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 3.099e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.027184 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.676 9.627 15.6342) with tilt (0 0 0)
+  triclinic box = (0 0 0) to (16.676 9.627 15.6342) with tilt (0 0 0)
+  triclinic box = (0 0 0) to (16.676 9.627 15.6342) with tilt (0 0 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56574   -55059.544    -60282.78   -60248.735   -44647.118  0.018408299 1.3244113e-05 1.0032245e-07    16.675955        9.627    15.634248    2509.9131 
+Loop time of 3.09944e-06 on 1 procs for 0 steps with 108 atoms
+
+129.1% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565737643                  0     -298.565737643
+  Force two-norm initial, final = 0.000700298 0.000700298
+  Force max component initial, final = 0.000107194 0.000107194
+  Final line search alpha, max atom move = 0 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 3.099e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000222921 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.62699 15.6342) with tilt (0 0 0)
+  triclinic box = (0 0 0) to (16.6759 9.62699 15.6342) with tilt (0 0 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56593   -55059.131   -60282.218   -60248.172   -44647.003  0.018408428 1.3244044e-05 1.0030874e-07    16.675938    9.6269904    15.634248    2509.9081 
+Loop time of 4.05312e-06 on 1 procs for 0 steps with 108 atoms
+
+98.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565926463 6.95093107378e-310     -298.565926463
+  Force two-norm initial, final = 0.000700301 0.000700301
+  Force max component initial, final = 0.000107195 0.000107195
+  Final line search alpha, max atom move = 6.95093e-310 7.45104e-314
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 4.053e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000180006 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.62701 15.6342) with tilt (0 0 0)
+  triclinic box = (0 0 0) to (16.6759 9.62701 15.6342) with tilt (0 0 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56574   -55059.544   -60282.402   -60249.113   -44647.118  0.018408293 1.2920936e-05 1.0033983e-07    16.675938    9.6270096    15.634248    2509.9131 
+Loop time of 3.09944e-06 on 1 procs for 0 steps with 108 atoms
+
+129.1% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565737696 1.82929584009e-316     -298.565737696
+  Force two-norm initial, final = 0.000690511 0.000690511
+  Force max component initial, final = 0.000105997 0.000105997
+  Final line search alpha, max atom move = 2.122e-314 2.24926e-318
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 3.099e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000291109 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0    -298.5659    -55059.11   -60282.268   -60248.601   -44646.462  0.018408637 1.3082347e-05 1.0029415e-07    16.675938        9.627    15.634232    2509.9081 
+Loop time of 1.90735e-06 on 1 procs for 0 steps with 108 atoms
+
+209.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565902022 3.48955008385e-317     -298.565902022
+  Force two-norm initial, final = 0.000695402 0.000695402
+  Force max component initial, final = 0.000106597 0.000106597
+  Final line search alpha, max atom move = 2.122e-314 2.26198e-318
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.907e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000169039 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6343) with tilt (0 0 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56576   -55059.565   -60282.352   -60248.685   -44647.659  0.018408085 1.3082598e-05 1.0033477e-07    16.675938        9.627    15.634264    2509.9131 
+Loop time of 5.96046e-06 on 1 procs for 0 steps with 108 atoms
+
+134.2% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565762137 4.64840674758e-317     -298.565762137
+  Force two-norm initial, final = 0.000695389 0.000695389
+  Force max component initial, final = 0.000106595 0.000106595
+  Final line search alpha, max atom move = 4.94066e-324 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 5.96e-06   |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000310898 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 -1.56342e-05)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56583   -55059.338    -60282.31   -60248.643   -44647.061  0.018408522 1.3337143e-05   0.12401266    16.675938        9.627    15.634248    2509.9106 
+Loop time of 5.00679e-06 on 1 procs for 0 steps with 108 atoms
+
+199.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565832079 2.42092166462e-322     -298.565832079
+  Force two-norm initial, final = 0.000695396 0.000695396
+  Force max component initial, final = 0.000106596 0.000106596
+  Final line search alpha, max atom move = 3.77071e-320 4.94066e-324
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 5.007e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000418901 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 1.56342e-05)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56583   -55059.338    -60282.31   -60248.643   -44647.061  0.018408199 1.2827812e-05  -0.12401246    16.675938        9.627    15.634248    2509.9106 
+Loop time of 3.8147e-06 on 1 procs for 0 steps with 108 atoms
+
+131.1% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565832079 4.94065645841e-324     -298.565832079
+  Force two-norm initial, final = 0.000695395 0.000695395
+  Force max component initial, final = 0.000106596 0.000106596
+  Final line search alpha, max atom move = 1.60077e-321 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 3.815e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000164032 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 -1.56342e-05 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56583   -55059.338    -60282.31   -60248.643   -44647.061  0.018408361   0.12406856 3.5499996e-07    16.675938        9.627    15.634248    2509.9106 
+Loop time of 3.8147e-06 on 1 procs for 0 steps with 108 atoms
+
+131.1% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565832079      0.00010364269     -298.565832079
+  Force two-norm initial, final = 0.000695396 0.000695396
+  Force max component initial, final = 0.000106596 0.000106596
+  Final line search alpha, max atom move = 1 0.000106596
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 3.815e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000192881 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 1.56342e-05 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56583   -55059.338    -60282.31   -60248.643   -44647.061  0.018408361   -0.1240424 -1.5433431e-07    16.675938        9.627    15.634248    2509.9106 
+Loop time of 2.86102e-06 on 1 procs for 0 steps with 108 atoms
+
+139.8% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565832079      0.00010364269     -298.565832079
+  Force two-norm initial, final = 0.000695395 0.000695395
+  Force max component initial, final = 0.000106596 0.000106596
+  Final line search alpha, max atom move = 1 0.000106596
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 2.861e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.021307 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (-9.627e-06 0 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56583   -55059.338    -60282.31   -60248.643   -44647.061   0.20753015 1.308247e-05 2.6186381e-07    16.675938        9.627    15.634248    2509.9106 
+Loop time of 3.09944e-06 on 1 procs for 0 steps with 108 atoms
+
+129.1% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565832079 1.84468064905e-316     -298.565832079
+  Force two-norm initial, final = 0.000695475 0.000695475
+  Force max component initial, final = 0.000106596 0.000106596
+  Final line search alpha, max atom move = 1.78276e-316 1.90018e-320
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 3.099e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+Reading restart file ...
+  restart file = 3 Mar 2020, LAMMPS = 3 Mar 2020
+  restoring atom style atomic from restart
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  pair style eam/fs stores no restart info
+  108 atoms
+  read_restart CPU = 0.000184059 secs
+Changing box ...
+  triclinic box = (0 0 0) to (16.6759 9.627 15.6342) with tilt (9.627e-06 0 0)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.3
+  ghost atom cutoff = 7.3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/nsq/newton
+      stencil: none
+      bin: none
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.444 | 4.444 | 4.444 Mbytes
+Step Temp PotEng Press Pxx Pyy Pzz Pxy Pxz Pyz Lx Ly Lz Volume 
+       0            0   -298.56583   -55059.338    -60282.31   -60248.643   -44647.061  -0.17071343 1.3082476e-05 -6.1222622e-08    16.675938        9.627    15.634248    2509.9106 
+Loop time of 3.09944e-06 on 1 procs for 0 steps with 108 atoms
+
+161.3% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+        -298.565832079                 10     -298.565832079
+  Force two-norm initial, final = 0.000695372 0.000695372
+  Force max component initial, final = 0.000106596 0.000106596
+  Final line search alpha, max atom move = 4.94066e-324 0
+  Iterations, force evaluations = 0 0
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 3.099e-06  |            |       |100.00
+
+Nlocal:    108 ave 108 max 108 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    800 ave 800 max 800 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    3672 ave 3672 max 3672 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 3672
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+=========================================
+Components of the Elastic Constant Tensor
+=========================================
+Elastic Constant C11all = 47.028701689851 GPa
+Elastic Constant C22all = 47.0458702999167 GPa
+Elastic Constant C33all = 59.8805207147961 GPa
+Elastic Constant C12all = 9.18002834732762 GPa
+Elastic Constant C13all = 4.96475773488782 GPa
+Elastic Constant C23all = 4.9624803074039 GPa
+Elastic Constant C44all = 12.4012562032368 GPa
+Elastic Constant C55all = 12.4055477917794 GPa
+Elastic Constant C66all = 18.9121793966031 GPa
+Elastic Constant C14all = 3.09535897299894e-10 GPa
+Elastic Constant C15all = -1.6163968781386e-05 GPa
+Elastic Constant C16all = 4.31045181503719e-06 GPa
+Elastic Constant C24all = -7.7732197565009e-10 GPa
+Elastic Constant C25all = 1.61552929616998e-05 GPa
+Elastic Constant C26all = 6.76361007256876e-06 GPa
+Elastic Constant C34all = -3.38019828098475e-09 GPa
+Elastic Constant C35all = -1.37343745099756e-08 GPa
+Elastic Constant C36all = 2.6710263903216e-05 GPa
+Elastic Constant C45all = 2.54666394310363e-05 GPa
+Elastic Constant C46all = 1.6153949220325e-05 GPa
+Elastic Constant C56all = -1.36757609414412e-10 GPa
+=========================================
+Average properties for a cubic crystal
+=========================================
+Bulk Modulus = 21.3521806093114 GPa
+Shear Modulus 1 = 14.5729944638731 GPa
+Shear Modulus 2 = 22.4746377191574 GPa
+Poisson Ratio = 0.11040682959384
+Total wall time: 0:00:00

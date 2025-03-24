@@ -1,0 +1,375 @@
+import subprocess
+import shutil
+import os
+import copy
+import threading
+import multiprocessing
+import time
+import gc
+import logging
+from collections import OrderedDict
+
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++ 测试学习专用 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# print(os.listdir())
+# print('---------获取当前目录的方法--------')
+# print(os.getcwd())
+# print(os.path.abspath(os.path.dirname(__file__)))
+
+# print('---------获取上级目录的方法--------')   #  # https://www.cnblogs.com/yang220/p/13597518.html
+# print(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
+# print(os.path.abspath(os.path.dirname(os.getcwd())))
+# print(os.path.abspath(os.path.join(os.getcwd(), "..")))
+
+# print('---------获取上上级目录的方法--------')
+# print(os.path.abspath(os.path.join(os.getcwd(), "../..")))
+
+# # ++++++++++++++++++++++++++++++对应源文件中的creat()方法+++++++++++++++++++++++++++++++++++++++++
+# root_path = os.path.abspath(os.path.abspath(os.path.join(os.getcwd(), "..")))
+# dir_name_list = os.listdir(root_path)
+# # print('上级目录root_path为：', root_path)   # 例如：上级目录为： D:\★科研\Zn_pymoo
+# # print(os.listdir(root_path))
+# a = os.listdir(root_path)
+# b = [i for i in a if not i.endswith(".py")]  # 剔除root目录下的.py文件
+# print(b)
+
+#
+# #  拷贝"lmp_scripts_db"的目录，注意copy可以获取文件权限，copyfile无法获取权限
+# if 'lmp_scripts_db' not in dir_name_list:# 确保存在这个文件名
+#     raise FileExistsError("缺少lammps计算的lmp_scripts_db配置文件，请确认存在！")
+# else:
+#     for file_name in dir_name_list:
+#         if file_name == 'lmp_scripts_db':
+#             src_dir = os.path.join(root_path, file_name)
+#             # print('src_dir = ', src_dir)
+#             dst_dir = os.path.join(root_path, file_name.replace("lmp_scripts", "structure"))  #  把'lmp_scripts_db'目录拷贝到新目录"structure_db"下
+#             if os.path.exists(dst_dir):  # self._sim_dir = 'MgO_NaCl.E_min_all'
+#                 shutil.rmtree(dst_dir)  # 如果lmps_MgO_pareto_iterate路径下存在'MgO_NaCl.E_min_all'目录，则删除该目录
+#             shutil.copytree(src=src_dir, dst=dst_dir)  # shutil.copytree(源目录，目标目录) 可以递归copy多个目录到指定目录下。
+#             print('---------------源目录 %s 已拷贝到目标目录 %s 中---------------------'%(src_dir, dst_dir))
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++ 测试学习专用 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+# lammps管理器类
+class SimulationManager:
+    def __init__(self):
+        # from input.DFT_qois import element_name, qoi_name_list, qoi_value_list
+        # self.qoi_name_list = qoi_name_list
+        # self.qoi_value_list = qoi_value_list
+        # # 存的是第一性原理计算的参考值
+        # self.qois_ref_dict = OrderedDict()
+        # for key, v in zip(qoi_name_list, qoi_value_list):
+        #     self.qois_ref_dict[key] = v
+
+        # 要用到？
+        # self._qoi_err_names = [element_name + ".%s.err"%i for i in qoi_name_list]  # 2020-12-14 例如生成：['Zn.B', 'Zn.C11', 'Zn.C12', 'Zn.C13', 'Zn.C33', 'Zn.C44', 'Zn.Ec']
+
+        # 用于存放每次计算所有qoi预测值
+        # self._qois_pre_dict = OrderedDict()
+
+        self.root_path = os.getcwd()
+        # print('上级目录root_path为：', self.root_path)   # 例如：上级目录为： D:\★科研\Zn_pymoo
+        # print(os.listdir(self.root_path))
+        self.dir_name_list = os.listdir(self.root_path)  # 根目录下的文件列表
+
+        if 'lmp_scripts_db' not in self.dir_name_list:  # 确保存在这个文件名
+            raise FileExistsError("请确认lmp_scripts_db配置文件存在！")
+
+        else:
+            lmp_setting_dir = os.path.join(self.root_path, 'lmp_scripts_db')
+            name_list = os.listdir(lmp_setting_dir)
+
+            self.lmps_sim_obj = {}
+            for name in name_list:
+                if name.endswith('.txt') or name.endswith('.py'):  # 边界条件：用于过滤掉xxx/lmp_eam_fs_gen目录下的.txt以及__init__.py文件
+                    pass
+                else:
+                    self.lmps_sim_obj[name] = None  # 获取'lmp_scripts_db'目录下的子文件夹名字
+
+    # @property
+    # def qois_pre_dict(self):
+    #     return self._qois_pre_dict
+    #
+    # @property
+    # def qoi_values(self):
+    #     return self._qoi_values
+    #
+    # @property
+    # def qoi_errors(self):
+    #     return self._qoi_errors
+
+    # 拷贝lmp_scripts_db目录的某个子目录，并创建structure_db目录的某个子目录
+    def create_dir(self, sim_type_name):  # sim_type_name例如等于elastic
+
+        # for file_name in self.dir_name_list:
+        #     if file_name == 'lmp_scripts_db':
+        #         self.src_dir = os.path.join(self.root_path, file_name, sim_type_name)
+        #         # print('src_dir = ', src_dir)
+        #         self.dst_dir = os.path.join(self.root_path,
+        #                                     file_name.replace("lmp_scripts", "structure"),
+        #                                     sim_type_name)  # 把'lmp_scripts_db'目录拷贝到新目录"structure_db"下
+        #         if os.path.exists(self.dst_dir):  # 例如：self._dst_dir = 'xxx/structure_db/elastic'
+        #             shutil.rmtree(self.dst_dir)  # 如果lmps_MgO_pareto_iterate路径下存在'MgO_NaCl.E_min_all'目录，则删除该目录
+        #         shutil.copytree(src=self.src_dir, dst=self.dst_dir)  # shutil.copytree(源目录，目标目录) 可以递归copy多个目录到指定目录下。
+        #         print('---------------源目录 %s 已拷贝到目标目录 %s 中---------------------' % (self.src_dir, self.dst_dir))
+        #         return
+
+        file_name = 'lmp_scripts_db'  # 直接把配置文件名字写死了！！！
+        self.src_dir = os.path.join(self.root_path, file_name, sim_type_name)
+        # print('src_dir = ', src_dir)
+        self.dst_dir = os.path.join(self.root_path,
+                                    file_name.replace("lmp_scripts", "structure"),
+                                    sim_type_name)  # 把'lmp_scripts_db'目录拷贝到新目录"structure_db"下
+        if os.path.exists(self.dst_dir):  # 例如：self._dst_dir = 'xxx/structure_db/elastic'
+            shutil.rmtree(self.dst_dir)  # 如果lmps_MgO_pareto_iterate路径下存在'MgO_NaCl.E_min_all'目录，则删除该目录
+        shutil.copytree(src=self.src_dir, dst=self.dst_dir)  # shutil.copytree(源目录，目标目录) 可以递归copy多个目录到指定目录下。
+        # print('---------------源目录 %s 已拷贝到目标目录 %s 中---------------------' % (self.src_dir, self.dst_dir))
+
+    # +++++++++++++++++++++++++++++++++++ TO DO 2020-12-15: 给定一组势函数参数，自动计算和获取各种目标量 +++++++++++++++++++++++++++++++++++++
+
+    # def calculate_qois(self, var_dict):
+    #     assert self.qois_pre_dict.items() == var_dict.items()  # 确保预测值和传进来的键值对是一样的
+    #     # 计算qois对应的error值
+    #     self._qoi_values = copy.deepcopy(var_dict)  # 即3者是相等的：self.qois_pre_dict = var_dict = self._qoi_values
+    #     self._qoi_errors = {}
+    #     # 需要注意字典是无序的，因此字典类型预测值self.qoi_pre_dict和字典类型参考值self.qois_ref_dict可能存在key和value不是一一对应的
+    #     try:
+    #         for k in self.qoi_name_list:
+    #             self._qoi_errors[k] = var_dict[k] - self.qois_ref_dict[k]
+    #
+    #     except Exception as e:
+    #         print('计算qois.err出错：', e)
+    #         self._qoi_errors = None
+    #
+    #     return self._qoi_values, self._qoi_errors
+
+
+# ------------------------------------ 创建qoi的类和lammps计算--------------------------------------
+
+# qois中的弹性常数等计算
+class elastic_simulation:
+    def __init__(self):
+        pass
+
+    def lmp_run(self, current_dir):
+        self.cur_dir = current_dir  # 例如"xxx/structure_db/elastic
+        subprocess.run('bash ' + 'elas_runsimulation.sh', shell=True, cwd=self.cur_dir)  # 需要3min左右时间运行完.sh的lammps计算
+
+    def get_value(self):
+        """
+        读取'elas_out.dat'文件，得到6个目标量qoi
+        Returns:
+        """
+        self.C11 = None
+        self.C12 = None
+        self.C13 = None
+        self.C33 = None
+        self.C44 = None
+        self.B = None
+        file_name = os.path.join(self.cur_dir, 'elas_out.dat')  # 例如"xxx/structure_db/elastic/elas_out.dat
+        out_file = open(file_name, 'r')  # elas_out.dat以后也可以写成更加通用化的，例如读取.sh文件最后一行，提取出字符串elas_out.dat
+        for line in out_file:
+            # 下面的if判断用于提取C11,...,B的6个qoi目标量
+            if line.startswith("Elastic Constant C11all"):
+                self.C11 = eval(line.split(" ")[-2])
+            elif line.startswith("Elastic Constant C12all"):
+                self.C12 = eval(line.split(" ")[-2])
+            elif line.startswith("Elastic Constant C13all"):
+                self.C13 = eval(line.split(" ")[-2])
+            elif line.startswith("Elastic Constant C33all"):
+                self.C33 = eval(line.split(" ")[-2])
+            elif line.startswith("Elastic Constant C44all"):
+                self.C44 = eval(line.split(" ")[-2])
+            elif line.startswith("Bulk Modulus"):
+                self.B = eval(line.split(" ")[-2])
+
+            else:  # TO DO：以后可以在这里做一个计算elastic任务的时间提取
+                pass
+        out_file.close()
+
+        return self.C11, self.C12, self.C44, self.C33, self.C13, self.B
+
+
+# 计算空位形成能Evf
+class Evf_simulation:
+    def __init__(self):
+        pass
+
+    def lmp_run(self, current_dir):
+        self.cur_dir = current_dir  # 例如"xxx/structure_db/E_van_f
+        subprocess.run('bash ' + 'Zn_Evf.sh', shell=True, cwd=self.cur_dir)
+        print('The vacancy formation energy calclation is finished!')
+
+    def get_value(self):
+        self.Evf = None
+        out_file = open(os.path.join(self.cur_dir, 'Evf.dat'), 'r')
+        # way0: 一行命令直接读取到空位形成能
+        # evf = eval(open('Evf.dat', 'r').read().split("\n")[-3].split("=")[1])
+        # way1
+        target_line = out_file.read().split("\n")[-3]
+        self.Evf = eval(target_line.split("=")[1])
+        # way2: 常规提取出空位形成能的写法
+        # for line in out_file:
+        #     if line.startswith("Vacancy formation energy"):
+        #         self.Evf = eval(line.split("=")[1])  # 空位形成能Evf
+        out_file.close()
+
+        return self.Evf
+
+
+class Ec_simulation:
+    def __init__(self):
+        self.idx_list_hcp = []
+        self.Ec_list_hcp = []
+        self.idx_min_hcp = 0  # hcp的晶格常数
+        self.Ec_min_hcp = 0  # hcp的结合能
+
+        self.idx_list_fcc = []
+        self.Ec_list_fcc = []
+        self.idx_min_fcc = 0  # fcc的晶格常数
+        self.Ec_min_fcc = 0  # fcc的结合能
+
+        self.idx_list_bcc = []
+        self.Ec_list_bcc = []
+        self.idx_min_bcc = 0  # bcc的晶格常数
+        self.Ec_min_bcc = 0  # bcc的结合能
+
+        self.deta_hcp_bcc = 0  # hcp->bcc的结构能量差
+        self.deta_hcp_fcc = 0  # hcp->fcc的结构能量差
+
+    def shell_task(self, sh_name, current_dir):
+
+        cur_dir = current_dir
+
+        if sh_name == 'Zn_hcp.sh':
+            print('sh_name = ', sh_name)
+            subprocess.run('bash ' + sh_name, shell=True, cwd=cur_dir)
+            print('----------The <{}> calculation is finished! 提取Ec_out_hcp.dat的数据'.format(sh_name))
+
+
+
+
+        if sh_name == 'Zn_fcc.sh':
+            print('sh_name = ', sh_name)
+
+            subprocess.run('bash ' + sh_name, shell=True, cwd=cur_dir)
+            print('----------The <{}> calculation is finished! 提取Ec_out_fcc.dat的数据'.format(sh_name))
+
+
+
+
+        if sh_name == 'Zn_bcc.sh':
+            print('sh_name = ', sh_name)
+
+            subprocess.run('bash ' + sh_name, shell=True, cwd=cur_dir)
+            print('----------The <{}> calculation is finished! 提取Ec_out_bcc.dat的数据'.format(sh_name))
+
+
+
+    def lmp_run(self, current_dir):
+        # （1）bash运行Ec的shell脚本文件，生成结果文件Ec_out.dat # '/home/hjchen/simulation_projects/Mg/new_qois_and_APE_version/test/structure_db/Ec_script'
+        self.cur_dir = current_dir  # 例如"xxx/structure_db/E
+        start = time.time()
+        print('task2的lmp_run主线程：{}开始'.format(threading.current_thread().name))
+        # ++++++++++++new way: 基于多线程单位并行计算hcp->bcc和hcp->fcc的结构能量差(注：lammps计算时用的还是单核计算)
+        sh_name_list = ['Zn_hcp.sh', 'Zn_fcc.sh', 'Zn_bcc.sh']
+        # 实例化3个进程（基于多进程的并行计算）
+
+        t0 = multiprocessing.Process(target=self.shell_task, args=(sh_name_list[0], self.cur_dir))
+        t1 = multiprocessing.Process(target=self.shell_task, args=(sh_name_list[1], self.cur_dir))
+        t2 = multiprocessing.Process(target=self.shell_task, args=(sh_name_list[2], self.cur_dir))
+        # # 启动进程
+        t0.start()
+        t1.start()
+        t2.start()
+        # # join()方法会导致调用进程等待，直到它执行完毕
+        t0.join()
+        t1.join()
+        t2.join()
+
+
+
+        print('task2的lmp_run主线程：{}结束'.format(threading.current_thread().name))
+        print('task2的lmp_run主线程用时：{}s'.format(time.time() - start))
+
+    def get_value(self):
+
+        # （2）当执行完（1）的lammps计算后，读取Ec_out.dat文件，提取出结合能Ec_min
+        # TODO: 考虑用多线程进行这三个任务的计算（写三个方法）
+        out_file1 = open(os.path.join(self.cur_dir, 'Ec_out_hcp.dat'),'r') # 例如"xxx/structure_db/Ec/Ec_out_hcp.dat
+        for line in out_file1.readlines():
+            if line.startswith("@@@@"):
+                idx_hcp = eval(line.split(":")[1].strip().split(" ")[0])
+                Ec_hcp = eval(line.split(":")[1].strip().split(" ")[1])
+                # if Ec_hcp < 0:   # 只装入<0的数字和索引
+                #     self.idx_list_hcp.append(idx_hcp)
+                #     self.Ec_list_hcp.append(Ec_hcp)
+
+                # 通用格式
+                # 因为：实际给定一组势函数参数生成的势函数列表文件计算得到的结合能最小值不一定是负数的（也有可能全部都是大于0的值）
+                self.idx_list_hcp.append(idx_hcp)
+                self.Ec_list_hcp.append(Ec_hcp)
+
+        self.idx_min_hcp = self.idx_list_hcp[self.Ec_list_hcp.index(min(self.Ec_list_hcp))]  # 晶格常数
+        self.Ec_min_hcp = min(self.Ec_list_hcp)   # 最小的值为结合能
+        out_file1.close()
+
+
+        out_file2 = open(os.path.join(self.cur_dir, 'Ec_out_fcc.dat'),'r') # 例如"xxx/structure_db/Ec/Ec_out_fcc.dat
+        for line in out_file2.readlines():
+            if line.startswith("@@@@"):
+                idx_fcc = eval(line.split(":")[1].strip().split(" ")[0])
+                Ec_fcc = eval(line.split(":")[1].strip().split(" ")[1])
+                # if Ec_fcc < 0:  # 只装入<0的数字和索引
+                #     self.idx_list_fcc.append(idx_fcc)
+                #     self.Ec_list_fcc.append(Ec_fcc)
+                # 通用格式
+                self.idx_list_fcc.append(idx_fcc)
+                self.Ec_list_fcc.append(Ec_fcc)
+
+        self.idx_min_fcc = self.idx_list_fcc[self.Ec_list_fcc.index(min(self.Ec_list_fcc))]  # 晶格常数
+        self.Ec_min_fcc = min(self.Ec_list_fcc)  # 最小的值为结合能
+        out_file2.close()
+
+        out_file3 = open(os.path.join(self.cur_dir, 'Ec_out_bcc.dat'),'r')
+        for line in out_file3.readlines():
+            if line.startswith("@@@@"):
+                idx_bcc = eval(line.split(":")[1].strip().split(" ")[0])
+                Ec_bcc = eval(line.split(":")[1].strip().split(" ")[1])
+                # if Ec_bcc < 0:  # 只装入<0的数字和索引
+                #     self.idx_list_bcc.append(idx_bcc)
+                #     self.Ec_list_bcc.append(Ec_bcc)
+                # 通用格式
+                self.idx_list_bcc.append(idx_bcc)
+                self.Ec_list_bcc.append(Ec_bcc)
+
+        self.idx_min_bcc = self.idx_list_bcc[self.Ec_list_bcc.index(min(self.Ec_list_bcc))]  # 晶格常数
+        self.Ec_min_bcc = min(self.Ec_list_bcc)  # 最小的值为结合能
+        out_file3.close()
+
+        # TODO: 确认下这里结构能量差的计算是用绝对值计算吗？  改为bcc-hcp和fcc-hcp的值
+        # self.deta_hcp_bcc = abs(abs(self.Ec_min_hcp) - abs(self.Ec_min_bcc))   # hcp->bcc的结构能量差
+        # self.deta_hcp_fcc = abs(abs(self.Ec_min_hcp) - abs(self.Ec_min_fcc))   # hcp->fcc的结构能量差
+        self.deta_hcp_bcc = self.Ec_min_bcc - self.Ec_min_hcp     # hcp->bcc的结构能量差
+        self.deta_hcp_fcc = self.Ec_min_fcc - self.Ec_min_hcp     # hcp->fcc的结构能量差
+
+
+        print("ahcp, Ec, abcc, afcc, detaHB, detaHF分别为: [{}, {}, {}, {}, {}, {}]"
+              .format(self.idx_min_hcp, self.Ec_min_hcp, self.idx_min_bcc, self.idx_min_fcc, self.deta_hcp_bcc, self.deta_hcp_fcc))
+        return self.idx_min_hcp, self.Ec_min_hcp, self.idx_min_bcc, self.idx_min_fcc, self.deta_hcp_bcc, self.deta_hcp_fcc  # a, Ec, Ehcp-bcc, Ehcp-fcc
+
+if __name__ == '__main__':
+
+    # print('os.getcwd() = ', os.getcwd())
+    #
+    # ec_sim = Ec_simulation()
+    # ec_sim.lmp_run(os.getcwd())
+    # print(ec_sim.get_value())
+    pass
+
+
+
+
+
+

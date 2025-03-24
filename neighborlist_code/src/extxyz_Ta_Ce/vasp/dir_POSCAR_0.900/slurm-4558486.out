@@ -1,0 +1,20 @@
+--------------------sub_vasp当前环境--------------------------
+Currently Loaded Modulefiles:
+ 1) anaconda/3-Python-3.8.3-phonopy-phono3py  
+
+--------------------sub_vasp当前环境--------------------------
+m3co2507.para.bscc
+Sun Aug 20 15:14:30 CST 2023
+------------------------^^^^^^^^^^^^^^---------------------------
+--------------------sub_vasp当前环境--------------------------
+Currently Loaded Modulefiles:
+ 1) anaconda/3-Python-3.8.3-phonopy-phono3py   3) mpi/oneAPI/2022.1  
+ 2) oneAPI/2022.1                             
+
+--------------------sub_vasp当前环境--------------------------
+---------96个cpu计算
+
+real	0m9.261s
+user	0m0.040s
+sys	0m0.070s
+Sun Aug 20 15:14:39 CST 2023

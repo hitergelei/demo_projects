@@ -1,0 +1,46 @@
+units             metal
+boundary          p  p  p
+atom_style        atomic
+
+#variable          i loop 60
+#variable          x equal 3.7-0.02*$i
+variable          i loop 2880
+#variable          x equal 3.246-0.001*$i
+#variable          x equal 3.3-0.0005*$i 原
+variable          x equal 3.2-0.005*$i
+
+
+#--------------------setting c/a ratio  by hjchen--------------------
+lattice          custom $x a1 1.7320508080 0 0 a2 0 1.0 0  a3 0 0 1.624 basis 0.0 0.0 0.0 basis 0.5 0.5 0.0 basis 0.33333333333333333333 0.0 0.5 basis 0.83333333333333333333 0.5 0.5
+
+
+region            box block 0 20 0 20 0 20
+create_box        1 box
+create_atoms      1 box
+
+pair_style        eam/fs
+pair_coeff        * * ./Mg_2021chj.eam.fs Mg
+
+neighbor          2.0 bin
+neigh_modify      every 1 delay 5 check yes
+
+variable          N equal atoms
+
+variable          E equal  pe/$N
+variable          v equal  vol/$N
+variable          P equal  press/10000
+variable          H equal  enthalpy/$N
+
+timestep          0.001
+thermo            10
+
+min_style         sd
+minimize          1.0e-20  1.0e-30  1000  1000
+
+print             "@@@@  (energy per atom): $x $E $v $P $H"  append hcp_result.txt
+
+clear
+next              i
+jump              in.hcp_enthalpy
+
+

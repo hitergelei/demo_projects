@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="sshConfig://sshConfig://hjchen@49.123.66.125:2223 password/home/hjchen/anaconda3/bin/python3.8/home/hjchen/anaconda3/bin/python3.8" remoteFilesAllowedToDisappearOnAutoupload="false" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="sshConfig://sshConfig://hjchen@49.123.66.125:2223 password/home/hjchen/anaconda3/bin/python3.8/home/hjchen/anaconda3/bin/python3.8">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/hjchen/simulation_projects/Mg/new_qois_and_APE_version/test_new_multithreading/ok_multiprocessing_file_UL_a/Mg_param_0.05_sam10_100_simid7_file_UL_a_EcAPE_test2_Ebcc_Efcc" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
